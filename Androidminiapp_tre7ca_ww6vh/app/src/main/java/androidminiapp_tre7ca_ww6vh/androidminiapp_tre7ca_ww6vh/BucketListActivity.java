@@ -38,22 +38,7 @@ public class BucketListActivity extends AppCompatActivity {
         rvBucketItems = (RecyclerView) findViewById(R.id.rvBucketItems);
         nameField = (EditText) findViewById(R.id.bucketItemName);
 
-        bucketItems = BucketItem.createBucketItemList(1);
-
-        String name1 = "steam tunneling";
-        String desc1 = "adventure in the steam tunnels";
-        double lat1 = 38.0336;
-        double lon1 = 78.5080;
-        Boolean comp1 = Boolean.FALSE;
-        String name2 = "lighting of the lawn";
-        String desc2 = "see the lightshow and acappella at lighting of the lawn";
-        double lat2 = 38.0336;
-        double lon2 = 78.5080;
-        Boolean comp2 = Boolean.FALSE;
-
-        //addBucketItem(rvBucketItems, desc1, lat1, lon1, comp1);
-        //addBucketItem(rvBucketItems, desc2, lat2, lon2, comp2);
-
+        bucketItems = BucketItem.createInitialBucketList();
         BucketItemAdapter adapter = new BucketItemAdapter(this, bucketItems);
         rvBucketItems.setAdapter(adapter);
         rvBucketItems.setLayoutManager(new LinearLayoutManager(this));
