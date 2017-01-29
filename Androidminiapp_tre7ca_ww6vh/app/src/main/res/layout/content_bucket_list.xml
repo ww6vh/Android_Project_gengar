@@ -14,7 +14,8 @@
     tools:showIn="@layout/activity_bucket_list">
 
     <TextView
+        android:id="@+id/bucketItem_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="" />
 </RelativeLayout>

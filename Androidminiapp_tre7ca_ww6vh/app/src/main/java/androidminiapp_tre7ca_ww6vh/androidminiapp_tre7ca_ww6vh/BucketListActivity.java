@@ -1,5 +1,9 @@
 package androidminiapp_tre7ca_ww6vh.androidminiapp_tre7ca_ww6vh;
 
+/**
+ * Code adapted from Professor Sheriff's ListExample code
+ */
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,8 +12,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewParent;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 public class BucketListActivity extends AppCompatActivity {
+
+    ArrayList<BucketItem> bucketItems;
+    EditText nameField;
+    RecyclerView rvBucketItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +35,51 @@ public class BucketListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        rvBucketItems = (RecyclerView) findViewById(R.id.rvBucketItems);
+        nameField = (EditText) findViewById(R.id.bucketItemName);
+
+        bucketItems = BucketItem.createBucketItemList(1);
+
+        String name1 = "steam tunneling";
+        String desc1 = "adventure in the steam tunnels";
+        double lat1 = 38.0336;
+        double lon1 = 78.5080;
+        Boolean comp1 = Boolean.FALSE;
+        String name2 = "lighting of the lawn";
+        String desc2 = "see the lightshow and acappella at lighting of the lawn";
+        double lat2 = 38.0336;
+        double lon2 = 78.5080;
+        Boolean comp2 = Boolean.FALSE;
+
+        //addBucketItem(rvBucketItems, desc1, lat1, lon1, comp1);
+        //addBucketItem(rvBucketItems, desc2, lat2, lon2, comp2);
+
+        BucketItemAdapter adapter = new BucketItemAdapter(this, bucketItems);
+        rvBucketItems.setAdapter(adapter);
+        rvBucketItems.setLayoutManager(new LinearLayoutManager(this));
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addBucketItemButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Add a new BucketItem", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void addBucketItem(View view, String description, double latitude, double longitude, Boolean completed) {
+        // Make sure it is a name
+        if(nameField.getText().toString() != null && !nameField.getText().toString().equals("")) {
+            // Log the action
+            Log.d("BucketList", "addBucketItem " + nameField.getText().toString());
+            // Make a new bucketItem
+            bucketItems.add(new BucketItem(nameField.getText().toString(), description, latitude, longitude, completed));
+            // Get the adapter that manages the data set and let it know something new was added
+            rvBucketItems.getAdapter().notifyDataSetChanged();
+            // Blank the name field
+            nameField.setText("");
+        }
     }
 
     @Override
