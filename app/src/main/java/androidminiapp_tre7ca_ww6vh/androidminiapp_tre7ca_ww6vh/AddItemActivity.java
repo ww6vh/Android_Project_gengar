@@ -1,3 +1,7 @@
+/**
+ * Code adapted from Professor Sheriff's IntentExample code
+ */
+
 package androidminiapp_tre7ca_ww6vh.androidminiapp_tre7ca_ww6vh;
 
 import android.content.Intent;
