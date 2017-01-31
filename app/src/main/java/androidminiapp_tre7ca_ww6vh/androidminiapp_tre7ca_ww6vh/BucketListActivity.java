@@ -2,6 +2,7 @@ package androidminiapp_tre7ca_ww6vh.androidminiapp_tre7ca_ww6vh;
 
 /**
  * Code adapted from Professor Sheriff's ListExample code
+ * Code adapted from Professor Sheriff's IntentExample code
  */
 
 import android.os.Bundle;
@@ -20,7 +21,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
+
 import java.util.ArrayList;
+
+import java.net.URI;
 
 public class BucketListActivity extends AppCompatActivity {
 
@@ -48,8 +56,9 @@ public class BucketListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Add a new BucketItem", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Add a new BucketItem", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+                startActivity2(view);
             }
         });
     }
@@ -89,4 +98,11 @@ public class BucketListActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void startActivity2(View view) {
+        Intent intent = new Intent(this, AddItemActivity.class);
+        startActivity(intent);
+    }
+
+
 }
