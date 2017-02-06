@@ -44,6 +44,16 @@ public class BucketListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle("Bucket List");
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        /*
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //do something you want
+            }
+        */
         rvBucketItems = (RecyclerView) findViewById(R.id.rvBucketItems);
         nameField = (EditText) findViewById(R.id.bucketItemName);
 

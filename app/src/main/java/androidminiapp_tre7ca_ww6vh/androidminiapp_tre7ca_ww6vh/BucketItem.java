@@ -21,6 +21,7 @@ public class BucketItem {
         mLongitude = longitude;
         mCompleted = completed;
 
+
     }
 
     public String getName() {
