@@ -21,6 +21,10 @@
         <activity
             android:name=".AddItemActivity"
             android:label="Add Bucket List Item"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditItemActivity"
+            android:label="@string/title_activity_edit_item"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

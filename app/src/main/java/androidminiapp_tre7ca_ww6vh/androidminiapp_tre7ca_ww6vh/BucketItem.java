@@ -20,6 +20,7 @@ public class BucketItem {
         mLatitude = latitude;
         mLongitude = longitude;
         mCompleted = completed;
+
     }
 
     public String getName() {
