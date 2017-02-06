@@ -44,8 +44,8 @@ public class BucketListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle("Bucket List");
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         /*
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
