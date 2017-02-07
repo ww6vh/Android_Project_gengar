@@ -40,15 +40,6 @@
         android:layout_below="@+id/addBucketItemButton"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/bucketItemName"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
 
 
 </android.support.design.widget.CoordinatorLayout>

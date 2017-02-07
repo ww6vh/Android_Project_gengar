@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 // Create the basic adapter extending from RecyclerView.Adapter
@@ -87,13 +89,17 @@ public class BucketItemAdapter extends
             textView.setEnabled(false);
 
         }
-        
+
+        // Handle
     }
 
     // Returns the total count of items in the list
     @Override
     public int getItemCount() {
-        Log.d("test", mBucketItems.size()+"");
+        Log.d("test", mBucketItems.size() + "");
         return mBucketItems.size();
     }
+
+    
+
 }

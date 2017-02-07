@@ -12,15 +12,19 @@ public class BucketItem {
     private double mLatitude;
     private double mLongitude;
     private boolean mCompleted;
+    private String mMonth;
+    private String mDay;
+    private String mYear;
+    private String tDate;
 
     public BucketItem(String name, String description, double latitude, double longitude,
-                      boolean completed) {
+                      boolean completed, String date) {
         mName = name;
         mDescription = description;
         mLatitude = latitude;
         mLongitude = longitude;
         mCompleted = completed;
-
+        tDate = mMonth + "-" + mDay + "-" + mYear;
 
     }
 
@@ -48,6 +52,8 @@ public class BucketItem {
         return bucketItems;
     }*/
 
+
+
     public static ArrayList<BucketItem> createInitialBucketList(){
         ArrayList<BucketItem> bucketItems = new ArrayList<BucketItem>();
 
@@ -60,9 +66,11 @@ public class BucketItem {
         String desc2 = "see the lightshow and acappella at lighting of the lawn";
         double lat2 = 38.0336;
         double lon2 = 78.5080;
+        String dat1 = "12-01-2017";
+        String dat2 = "01-02-2017";
 
-        bucketItems.add(new BucketItem(name1, desc1, lat1, lon1, comp1));
-        bucketItems.add(new BucketItem(name2, desc2, lat2, lon2, comp1));
+        bucketItems.add(new BucketItem(name1, desc1, lat1, lon1, comp1, dat1));
+        bucketItems.add(new BucketItem(name2, desc2, lat2, lon2, comp1, dat2));
 
         return bucketItems;
     }

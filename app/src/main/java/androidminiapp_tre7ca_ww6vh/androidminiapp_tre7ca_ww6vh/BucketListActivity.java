@@ -35,6 +35,7 @@ public class BucketListActivity extends AppCompatActivity {
     ArrayList<BucketItem> bucketItems;
     EditText nameField;
     RecyclerView rvBucketItems;
+    BucketItemAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +56,10 @@ public class BucketListActivity extends AppCompatActivity {
             }
         */
         rvBucketItems = (RecyclerView) findViewById(R.id.rvBucketItems);
-        nameField = (EditText) findViewById(R.id.bucketItemName);
+        //nameField = (EditText) findViewById(R.id.bucketItemName);
 
         bucketItems = BucketItem.createInitialBucketList();
-        BucketItemAdapter adapter = new BucketItemAdapter(this, bucketItems);
+        adapter = new BucketItemAdapter(this, bucketItems);
         rvBucketItems.setAdapter(adapter);
         rvBucketItems.setLayoutManager(new LinearLayoutManager(this));
 
@@ -73,13 +74,13 @@ public class BucketListActivity extends AppCompatActivity {
         });
     }
 
-    public void addBucketItem(View view, String description, double latitude, double longitude, Boolean completed) {
+    public void addBucketItem(View view, String description, double latitude, double longitude, Boolean completed, String date) {
         // Make sure it is a name
         if(nameField.getText().toString() != null && !nameField.getText().toString().equals("")) {
             // Log the action
             Log.d("BucketList", "addBucketItem " + nameField.getText().toString());
             // Make a new bucketItem
-            bucketItems.add(new BucketItem(nameField.getText().toString(), description, latitude, longitude, completed));
+            bucketItems.add(new BucketItem(nameField.getText().toString(), description, latitude, longitude, completed, "in-progress"));
             // Get the adapter that manages the data set and let it know something new was added
             rvBucketItems.getAdapter().notifyDataSetChanged();
             // Blank the name field
@@ -109,9 +110,25 @@ public class BucketListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1) {
+            if(resultCode == AddItemActivity.RESULT_OK) {
+                String sName = data.getStringExtra("Name");
+                String sDescrip = data.getStringExtra("Desc");
+                double sLat =  Double.parseDouble(data.getStringExtra("Lat"));
+                double sLong = Double.parseDouble(data.getStringExtra("Long"));
+                String sDate = data.getStringExtra("Date");
+                BucketItem A = new BucketItem(sName, sDescrip, sLat, sLong, Boolean.FALSE, sDate);
+                bucketItems.add(A);
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
     public void startActivity2(View view) {
         Intent intent = new Intent(this, AddItemActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
 
