@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,6 +20,7 @@ public class AddItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("MyApp", "onCreate Add");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -27,37 +29,37 @@ public class AddItemActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        Button saveBut = (Button) findViewById(R.id.button);
-        saveBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
-                startActivity1(view);
-            }
-        });
+//        Button saveBut = (Button) findViewById(R.id.button);
+//        saveBut.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                //        .setAction("Action", null).show();
+//                startActivity1(view);
+//            }
+//        });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity1(view);
+                finish();
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
-                startActivity1(view);
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                //        .setAction("Action", null).show();
+//                startActivity1(view);
+//            }
+//        });
     }
 
-    public void startActivity1(View view) {
-        Intent intent = new Intent(this, BucketListActivity.class);
-        startActivity(intent);
-    }
+//    public void startActivity1(View view) {
+//        Intent intent = new Intent(this, BucketListActivity.class);
+//        startActivity(intent);
+//    }
 
     public void addItem(View view) {
         EditText eName = (EditText) findViewById(R.id.editText2);
@@ -75,12 +77,14 @@ public class AddItemActivity extends AppCompatActivity {
         int year = datePicker.getYear();
         String date = month + "-" + day + "-" + year;
 
-        Intent sendInput = new Intent(this, BucketListActivity.class);
+        Intent sendInput = new Intent();
         sendInput.putExtra("Name", sName);
         sendInput.putExtra("Desc", sDescrip);
         sendInput.putExtra("Lat", sLat);
         sendInput.putExtra("Long", sLong);
         sendInput.putExtra("Date", date);
+
+        Log.d("MyApp", "sending back " + sName);
 
         setResult(BucketListActivity.RESULT_OK, sendInput);
         finish();

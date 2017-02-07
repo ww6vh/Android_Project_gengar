@@ -5,6 +5,7 @@ package androidminiapp_tre7ca_ww6vh.androidminiapp_tre7ca_ww6vh;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,7 +91,13 @@ public class BucketItemAdapter extends
 
         }
 
-        // Handle
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View v) {
+
+            }
+
+        });
     }
 
     // Returns the total count of items in the list
@@ -100,6 +107,6 @@ public class BucketItemAdapter extends
         return mBucketItems.size();
     }
 
-    
+
 
 }

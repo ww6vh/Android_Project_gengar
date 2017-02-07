@@ -114,6 +114,7 @@ public class BucketListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1) {
             if(resultCode == AddItemActivity.RESULT_OK) {
+                Log.d("MyApp", "Name: " + data.getStringExtra("Name"));
                 String sName = data.getStringExtra("Name");
                 String sDescrip = data.getStringExtra("Desc");
                 double sLat =  Double.parseDouble(data.getStringExtra("Lat"));
