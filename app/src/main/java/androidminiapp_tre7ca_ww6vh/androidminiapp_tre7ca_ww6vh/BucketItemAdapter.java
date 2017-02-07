@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
@@ -25,7 +26,8 @@ public class BucketItemAdapter extends
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public TextView nameTextView;
-
+        public CheckBox checked;
+        public TextView dateTextView;
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView) {
@@ -34,6 +36,8 @@ public class BucketItemAdapter extends
             super(itemView);
 
             nameTextView = (TextView) itemView.findViewById(R.id.bucketItem_name);
+            //dateTextView = (TextView) itemView.findViewById(R.id.datePicker2);
+            checked = (CheckBox) itemView.findViewById(R.id.checkBox);
 
         }
     }
@@ -83,7 +87,7 @@ public class BucketItemAdapter extends
             textView.setEnabled(false);
 
         }
-
+        
     }
 
     // Returns the total count of items in the list
