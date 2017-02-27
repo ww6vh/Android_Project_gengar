@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -25,7 +26,7 @@ public class BucketItemAdapter extends
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public TextView nameTextView;
@@ -37,11 +38,17 @@ public class BucketItemAdapter extends
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
-
-            nameTextView = (TextView) itemView.findViewById(R.id.bucketItem_name);
+            nameTextView = (TextView) itemView.findViewById(R.id.bucket_name);
             //dateTextView = (TextView) itemView.findViewById(R.id.datePicker2);
             checked = (CheckBox) itemView.findViewById(R.id.checkBox);
+            nameTextView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
+        }
 
+        @Override
+        public void onClick(View view) {
+            int pos = getAdapterPosition();
+            Toast.makeText(view.getContext(), "Helllooo " + pos, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -85,9 +92,9 @@ public class BucketItemAdapter extends
         TextView textView = viewHolder.nameTextView;
         textView.setText(bucketItem.getName());
         if(!bucketItem.isCompleted()) {
-            textView.setClickable(false);
-            textView.setActivated(false);
-            textView.setEnabled(false);
+            textView.setClickable(true);
+            textView.setActivated(true);
+            textView.setEnabled(true);
 
         }
 
@@ -96,7 +103,6 @@ public class BucketItemAdapter extends
             public void onClick( View v) {
 
             }
-
         });
     }
 
