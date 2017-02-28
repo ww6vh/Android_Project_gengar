@@ -7,6 +7,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+
+import java.util.Date;
 
 public class EditItemActivity extends AppCompatActivity {
 
@@ -14,7 +18,21 @@ public class EditItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
+        Intent intent = getIntent();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        EditText name = (EditText) findViewById(R.id.editName);
+        EditText description = (EditText) findViewById(R.id.editDescrip);
+        EditText longitude = (EditText) findViewById(R.id.editLong);
+        EditText Latitude = (EditText) findViewById(R.id.editLat);
+        DatePicker date = (DatePicker) findViewById(R.id.editdatePicker2);
+
+        name.setText(intent.getStringExtra("Name"));
+        description.setText(intent.getStringExtra("Desc"));
+        longitude.setText(intent.getStringExtra("Lat"));
+        Latitude.setText(intent.getStringExtra("Long"));
+        //date.updateDate();
+        //date.updateDate(intent.get); = data.getStringExtra("Date");
+
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -23,7 +41,7 @@ public class EditItemActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity1(view);
+                finish();
             }
         });
 
@@ -36,11 +54,5 @@ public class EditItemActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void startActivity1(View view) {
-        Intent intent = new Intent(this, BucketListActivity.class);
-        startActivity(intent);
-    }
-
 
 }

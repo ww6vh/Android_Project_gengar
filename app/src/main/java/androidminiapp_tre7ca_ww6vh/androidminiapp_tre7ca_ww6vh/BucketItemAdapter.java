@@ -24,36 +24,9 @@ import java.util.List;
 public class BucketItemAdapter extends
         RecyclerView.Adapter<BucketItemAdapter.ViewHolder> {
 
-    // Provide a direct reference to each of the views within a data item
-    // Used to cache the views within the item layout for fast access
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        // Your holder should contain a member variable
-        // for any view that will be set as you render a row
-        public TextView nameTextView;
-        public CheckBox checked;
-        public TextView dateTextView;
-        // We also create a constructor that accepts the entire item row
-        // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
-            super(itemView);
-            nameTextView = (TextView) itemView.findViewById(R.id.bucket_name);
-            //dateTextView = (TextView) itemView.findViewById(R.id.datePicker2);
-            checked = (CheckBox) itemView.findViewById(R.id.checkBox);
-            nameTextView.setOnClickListener(this);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            int pos = getAdapterPosition();
-            Toast.makeText(view.getContext(), "Helllooo " + pos, Toast.LENGTH_SHORT).show();
-        }
-    }
-
+    private BucketItem bucket;
     // Store a member variable for the contacts
-    private List<BucketItem> mBucketItems;
+    public List<BucketItem> mBucketItems;
     // Store the context for easy access
     private Context mContext;
 
@@ -69,6 +42,38 @@ public class BucketItemAdapter extends
     }
 
     // Usually involves inflating a layout from XML and returning the holder
+
+    // Provide a direct reference to each of the views within a data item
+    // Used to cache the views within the item layout for fast access
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        // Your holder should contain a member variable
+        // for any view that will be set as you render a row
+        public TextView nameTextView;
+        public CheckBox checked;
+        public TextView dateTextView;
+        private BucketItem currBuck;
+        // We also create a constructor that accepts the entire item row
+        // and does the view lookups to find each subview
+        public ViewHolder(View itemView, BucketItem bucket) {
+            // Stores the itemView in a public final member variable that can be used
+            // to access the context from any ViewHolder instance.
+            super(itemView);
+            nameTextView = (TextView) itemView.findViewById(R.id.bucket_name);
+            //dateTextView = (TextView) itemView.findViewById(R.id.datePicker2);
+            checked = (CheckBox) itemView.findViewById(R.id.checkBox);
+            nameTextView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
+            currBuck = bucket;
+
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
+
+    }
+
     @Override
     public BucketItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
@@ -78,7 +83,7 @@ public class BucketItemAdapter extends
         View bucketItemView = inflater.inflate(R.layout.content_bucket_list, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(bucketItemView);
+        ViewHolder viewHolder = new ViewHolder(bucketItemView, bucket);
         return viewHolder;
     }
 
@@ -87,7 +92,7 @@ public class BucketItemAdapter extends
     public void onBindViewHolder(BucketItemAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
         BucketItem bucketItem = mBucketItems.get(position);
-
+        bucket = bucketItem;
         // Set item views based on your views and data model
         TextView textView = viewHolder.nameTextView;
         textView.setText(bucketItem.getName());
@@ -101,6 +106,12 @@ public class BucketItemAdapter extends
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View v) {
+                Intent mIntent = new Intent(mContext, EditItemActivity.class);
+                mIntent.putExtra("Name", bucket.getName());
+                mIntent.putExtra("Desc", bucket.getmDescription());
+                mIntent.putExtra("Lat", bucket.getmLatitude());
+                mIntent.putExtra("Long", bucket.getmLongitude());
+                ((BucketListActivity)mContext).startActivityForResult(mIntent, 2);
 
             }
         });
@@ -112,7 +123,6 @@ public class BucketItemAdapter extends
         Log.d("test", mBucketItems.size() + "");
         return mBucketItems.size();
     }
-
 
 
 }

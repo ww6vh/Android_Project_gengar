@@ -32,9 +32,17 @@ public class BucketItem {
         return mName;
     }
 
+    public String getmDescription() {return mDescription;}
+
+    public double getmLatitude() {return mLatitude;}
+
+    public double getmLongitude() {return mLongitude;}
+
     public boolean isCompleted() {
         return mCompleted;
     }
+
+    public String gettDate() {return tDate;}
 
     private static int lastBucketItemId = 0;
 

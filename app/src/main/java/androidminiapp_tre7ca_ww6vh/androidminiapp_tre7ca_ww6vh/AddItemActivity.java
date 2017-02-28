@@ -26,15 +26,6 @@ public class AddItemActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-//        Button saveBut = (Button) findViewById(R.id.button);
-//        saveBut.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                //        .setAction("Action", null).show();
-//                startActivity1(view);
-//            }
-//        });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,21 +33,7 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                //        .setAction("Action", null).show();
-//                startActivity1(view);
-//            }
-//        });
     }
-
-//    public void startActivity1(View view) {
-//        Intent intent = new Intent(this, BucketListActivity.class);
-//        startActivity(intent);
-//    }
 
     public void addItem(View view) {
         EditText eName = (EditText) findViewById(R.id.eName);

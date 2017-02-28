@@ -69,7 +69,7 @@ public class BucketListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Snackbar.make(view, "Add a new BucketItem", Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
-                startActivity2(view);
+                startAddItemActivity(view);
             }
         });
     }
@@ -125,12 +125,26 @@ public class BucketListActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         }
+        if(resultCode == 2) {
+            if(resultCode == EditItemActivity.RESULT_OK) {
+
+            }
+        }
     }
 
-    public void startActivity2(View view) {
+    public void startAddItemActivity(View view) {
         Intent intent = new Intent(this, AddItemActivity.class);
         startActivityForResult(intent, 1);
     }
 
+    public void startEditItemActivity(View view, BucketItem bucket) {
+        Intent intent = new Intent(this, EditItemActivity.class);
 
+        intent.putExtra("Name", bucket.getName());
+        intent.putExtra("Desc", bucket.getmDescription());
+        intent.putExtra("Lat", bucket.getmLatitude());
+        intent.putExtra("Long", bucket.getmLongitude());
+        //intent.putExtra("Date", date);
+        startActivityForResult(intent, 1);
+    }
 }
