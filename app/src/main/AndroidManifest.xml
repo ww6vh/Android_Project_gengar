@@ -20,12 +20,12 @@
         </activity>
         <activity
             android:name=".AddItemActivity"
-            android:label="Add Bucket List Item"
+            android:label="Add BucketList Item"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name=".EditItemActivity"
-            android:label="@string/title_activity_edit_item"
+            android:label="Edit BucketList Item"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
     </application>
