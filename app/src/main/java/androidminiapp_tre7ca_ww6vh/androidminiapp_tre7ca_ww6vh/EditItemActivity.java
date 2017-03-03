@@ -36,7 +36,7 @@ public class EditItemActivity extends AppCompatActivity {
         int day = Integer.parseInt(intent.getStringExtra("eDay"));
         int month = Integer.parseInt(intent.getStringExtra("eMonth"));
         int year = Integer.parseInt(intent.getStringExtra("eYear"));
-        int pos = intent.getIntExtra("bucketIndex", 0);
+        pos = intent.getIntExtra("bucketIndex", 0);
         date.updateDate(year, month-1, day);
 
         setSupportActionBar(toolbar);
