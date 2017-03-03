@@ -27,6 +27,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import java.net.URI;
 
@@ -57,8 +58,8 @@ public class BucketListActivity extends AppCompatActivity {
         */
         rvBucketItems = (RecyclerView) findViewById(R.id.rvBucketItems);
         //nameField = (EditText) findViewById(R.id.bucketItemName);
-
         bucketItems = BucketItem.createInitialBucketList();
+        Collections.sort(bucketItems);
         adapter = new BucketItemAdapter(this, bucketItems);
         rvBucketItems.setAdapter(adapter);
         rvBucketItems.setLayoutManager(new LinearLayoutManager(this));
@@ -80,7 +81,7 @@ public class BucketListActivity extends AppCompatActivity {
             // Log the action
             Log.d("BucketList", "addBucketItem " + nameField.getText().toString());
             // Make a new bucketItem
-            bucketItems.add(new BucketItem(nameField.getText().toString(), description, latitude, longitude, completed, "in-progress"));
+            bucketItems.add(new BucketItem(nameField.getText().toString(), description, latitude, longitude, completed, date));
             // Get the adapter that manages the data set and let it know something new was added
             rvBucketItems.getAdapter().notifyDataSetChanged();
             // Blank the name field
@@ -122,12 +123,22 @@ public class BucketListActivity extends AppCompatActivity {
                 String sDate = data.getStringExtra("Date");
                 BucketItem A = new BucketItem(sName, sDescrip, sLat, sLong, Boolean.FALSE, sDate);
                 bucketItems.add(A);
+                Collections.sort(bucketItems);
                 adapter.notifyDataSetChanged();
             }
         }
         if(resultCode == 2) {
             if(resultCode == EditItemActivity.RESULT_OK) {
+                Log.d("MyApp", "Name: " + data.getStringExtra("Name"));
+                String sName = data.getStringExtra("Name");
+                String sDescrip = data.getStringExtra("Desc");
+                double sLat =  Double.parseDouble(data.getStringExtra("Lat"));
+                double sLong = Double.parseDouble(data.getStringExtra("Long"));
+                String sDate = data.getStringExtra("Date");
 
+                //BucketItem A = new BucketItem(sName, sDescrip, sLat, sLong, Boolean.FALSE, sDate);
+                //bucketItems.add(A);
+                adapter.notifyDataSetChanged();
             }
         }
     }
@@ -137,14 +148,4 @@ public class BucketListActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
-    public void startEditItemActivity(View view, BucketItem bucket) {
-        Intent intent = new Intent(this, EditItemActivity.class);
-
-        intent.putExtra("Name", bucket.getName());
-        intent.putExtra("Desc", bucket.getmDescription());
-        intent.putExtra("Lat", bucket.getmLatitude());
-        intent.putExtra("Long", bucket.getmLongitude());
-        //intent.putExtra("Date", date);
-        startActivityForResult(intent, 1);
-    }
 }

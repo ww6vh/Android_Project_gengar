@@ -12,16 +12,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Collections;
 
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views
-public class BucketItemAdapter extends
+public class  BucketItemAdapter extends
         RecyclerView.Adapter<BucketItemAdapter.ViewHolder> {
 
     private BucketItem bucket;
@@ -51,7 +53,7 @@ public class BucketItemAdapter extends
         public TextView nameTextView;
         public CheckBox checked;
         public TextView dateTextView;
-        private BucketItem currBuck;
+        //private BucketItem currBuck;
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView, BucketItem bucket) {
@@ -59,11 +61,9 @@ public class BucketItemAdapter extends
             // to access the context from any ViewHolder instance.
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.bucket_name);
-            //dateTextView = (TextView) itemView.findViewById(R.id.datePicker2);
+            dateTextView = (TextView) itemView.findViewById(R.id.bucketDate);
             checked = (CheckBox) itemView.findViewById(R.id.checkBox);
             nameTextView.setOnClickListener(this);
-            //itemView.setOnClickListener(this);
-            currBuck = bucket;
 
         }
 
@@ -91,26 +91,39 @@ public class BucketItemAdapter extends
     @Override
     public void onBindViewHolder(BucketItemAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
-        BucketItem bucketItem = mBucketItems.get(position);
-        bucket = bucketItem;
+        final BucketItem bucketItem = mBucketItems.get(position);
         // Set item views based on your views and data model
         TextView textView = viewHolder.nameTextView;
         textView.setText(bucketItem.getName());
+        Log.d("This is the date, ", bucketItem.gettDate());
+        viewHolder.dateTextView.setText(bucketItem.gettDate());
         if(!bucketItem.isCompleted()) {
             textView.setClickable(true);
             textView.setActivated(true);
             textView.setEnabled(true);
 
         }
+        viewHolder.checked.setOnCheckedChangeListener(null);
+        viewHolder.checked.setChecked(bucketItem.isCompleted());
+        viewHolder.checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                bucketItem.setmCompleted(!bucketItem.isCompleted());
+                Collections.sort(mBucketItems);
+                notifyDataSetChanged();
+            }
+        });
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View v) {
                 Intent mIntent = new Intent(mContext, EditItemActivity.class);
-                mIntent.putExtra("Name", bucket.getName());
-                mIntent.putExtra("Desc", bucket.getmDescription());
-                mIntent.putExtra("Lat", bucket.getmLatitude());
-                mIntent.putExtra("Long", bucket.getmLongitude());
+                Log.d("BucketList", "" + bucketItem.getmLatitude());
+                mIntent.putExtra("eName", bucketItem.getName());
+                mIntent.putExtra("eDesc", bucketItem.getmDescription());
+                mIntent.putExtra("eLat", bucketItem.getmLatitude());
+                mIntent.putExtra("eLong", bucketItem.getmLongitude());
+                mIntent.putExtra("eDate", bucketItem.gettDate());
                 ((BucketListActivity)mContext).startActivityForResult(mIntent, 2);
 
             }

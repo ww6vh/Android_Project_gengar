@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editLat" />
+            android:id="@+id/edLat" />
 
         <TextView
             android:text="Longitude"
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editLong" />
+            android:id="@+id/edLong" />
 
         <DatePicker
             android:layout_width="wrap_content"
@@ -73,14 +73,14 @@
             android:layout_gravity="center" />
 
         <Button
-            android:text="Add Item"
+            android:text="Edit Item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="17dp"
-            android:id="@+id/editbutton"
+            android:id="@+id/editBucket"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:onClick="addItem"
+            android:onClick="editItem"
             android:layout_gravity="center"/>
 
 

@@ -43,7 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/bucket_name"
         android:layout_alignLeft="@id/bucket_name"
-        android:id="@+id/bucketdate"
+        android:textSize="9dp"
+        android:id="@+id/bucketDate"
         />
 
 </RelativeLayout>

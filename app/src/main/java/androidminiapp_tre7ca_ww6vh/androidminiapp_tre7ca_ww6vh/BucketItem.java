@@ -1,12 +1,17 @@
 package androidminiapp_tre7ca_ww6vh.androidminiapp_tre7ca_ww6vh;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Collections;
+
+import android.app.usage.NetworkStats;
+import android.util.Log;
 
 /**
  * Code adapted from Professor Sheriff's ListExample code
  */
 
-public class BucketItem {
+public class BucketItem implements Comparable<BucketItem>{
     private String mName;
     private String mDescription;
     private double mLatitude;
@@ -24,7 +29,12 @@ public class BucketItem {
         mLatitude = latitude;
         mLongitude = longitude;
         mCompleted = completed;
-        tDate = mMonth + "-" + mDay + "-" + mYear;
+        tDate = date;
+        String[] dateComps = tDate.split("-");
+        mMonth = dateComps[0];
+        mDay = dateComps[1];
+        mYear = dateComps[2];
+        Log.d("date components: ", mMonth + " " + mDay + " " + mYear);
 
     }
 
@@ -42,7 +52,17 @@ public class BucketItem {
         return mCompleted;
     }
 
+    public void setmCompleted(Boolean done) {
+        mCompleted = done;
+    }
+
     public String gettDate() {return tDate;}
+
+    public String getmMonth() {return mMonth;}
+
+    public String getmDay() {return mDay;}
+
+    public String getmYear() {return mYear;}
 
     private static int lastBucketItemId = 0;
 
@@ -74,12 +94,40 @@ public class BucketItem {
         String desc2 = "see the lightshow and acappella at lighting of the lawn";
         double lat2 = 38.0336;
         double lon2 = 78.5080;
-        String dat1 = "12-01-2017";
+        String dat1 = "12-01-1995";
         String dat2 = "01-02-2017";
 
         bucketItems.add(new BucketItem(name1, desc1, lat1, lon1, comp1, dat1));
         bucketItems.add(new BucketItem(name2, desc2, lat2, lon2, comp1, dat2));
-
+        Collections.sort(bucketItems);
         return bucketItems;
+    }
+
+    @Override
+    public int compareTo(BucketItem B2) {
+        if(this.isCompleted() && !B2.isCompleted())
+            return 1;
+        else if(!this.isCompleted() && B2.isCompleted())
+            return -1;
+        else {
+            if (Integer.parseInt(this.mYear) > Integer.parseInt(B2.mYear))
+                return 1;
+            else if (Integer.parseInt(this.mYear) < Integer.parseInt(B2.mYear))
+                return -1;
+            else {
+                if (Integer.parseInt(this.mMonth) > Integer.parseInt(B2.mMonth))
+                    return 1;
+                else if (Integer.parseInt(this.mMonth) < Integer.parseInt(B2.mMonth))
+                    return -1;
+                else {
+                    if (Integer.parseInt(this.mDay) > Integer.parseInt(B2.mDay))
+                        return 1;
+                    else if (Integer.parseInt(this.mDay) < Integer.parseInt(B2.mDay))
+                        return -1;
+                    else
+                        return 0;
+                }
+            }
+        }
     }
 }
