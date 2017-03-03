@@ -34,7 +34,6 @@ public class BucketItem implements Comparable<BucketItem>{
         mMonth = dateComps[0];
         mDay = dateComps[1];
         mYear = dateComps[2];
-        Log.d("date components: ", mMonth + " " + mDay + " " + mYear);
 
     }
 
@@ -52,10 +51,6 @@ public class BucketItem implements Comparable<BucketItem>{
         return mCompleted;
     }
 
-    public void setmCompleted(Boolean done) {
-        mCompleted = done;
-    }
-
     public String gettDate() {return tDate;}
 
     public String getmMonth() {return mMonth;}
@@ -63,6 +58,26 @@ public class BucketItem implements Comparable<BucketItem>{
     public String getmDay() {return mDay;}
 
     public String getmYear() {return mYear;}
+
+    public void setName(String str) { mName = str;}
+
+    public void setDescription (String str) {mDescription = str;}
+
+    public void setLatitude (Double dble) {mLatitude = dble;}
+
+    public void setLongitude (Double dble) {mLongitude = dble;}
+
+    public void setDate (String str) {
+        tDate = str;
+        String[] dateComps = tDate.split("-");
+        mMonth = dateComps[0];
+        mDay = dateComps[1];
+        mYear = dateComps[2];
+    }
+
+    public void setmCompleted(Boolean done) {
+        mCompleted = done;
+    }
 
     private static int lastBucketItemId = 0;
 

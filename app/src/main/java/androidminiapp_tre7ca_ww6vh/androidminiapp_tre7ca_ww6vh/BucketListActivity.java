@@ -115,7 +115,6 @@ public class BucketListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1) {
             if(resultCode == AddItemActivity.RESULT_OK) {
-                Log.d("MyApp", "Name: " + data.getStringExtra("Name"));
                 String sName = data.getStringExtra("Name");
                 String sDescrip = data.getStringExtra("Desc");
                 double sLat =  Double.parseDouble(data.getStringExtra("Lat"));
@@ -127,9 +126,9 @@ public class BucketListActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         }
-        if(resultCode == 2) {
+        if(requestCode == 2) {
             if(resultCode == EditItemActivity.RESULT_OK) {
-                Log.d("MyApp", "Name: " + data.getStringExtra("Name"));
+                Log.d("MyApp", "Edit Name: " + data.getStringExtra("Name"));
                 String sName = data.getStringExtra("Name");
                 String sDescrip = data.getStringExtra("Desc");
                 double sLat =  Double.parseDouble(data.getStringExtra("Lat"));
@@ -137,7 +136,14 @@ public class BucketListActivity extends AppCompatActivity {
                 String sDate = data.getStringExtra("Date");
 
                 //BucketItem A = new BucketItem(sName, sDescrip, sLat, sLong, Boolean.FALSE, sDate);
-                //bucketItems.add(A);
+                int position = data.getIntExtra("bucketIndex", 0);
+                BucketItem bucket = bucketItems.get(position);
+                bucket.setName(sName);
+                bucket.setDescription(sDescrip);
+                bucket.setLatitude(sLat);
+                bucket.setLongitude(sLong);
+                bucket.setDate(sDate);
+
                 adapter.notifyDataSetChanged();
             }
         }

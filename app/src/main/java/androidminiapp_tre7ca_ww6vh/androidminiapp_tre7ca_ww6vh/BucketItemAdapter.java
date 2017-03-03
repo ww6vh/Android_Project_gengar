@@ -89,13 +89,12 @@ public class  BucketItemAdapter extends
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(BucketItemAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(BucketItemAdapter.ViewHolder viewHolder, final int position) {
         // Get the data model based on position
         final BucketItem bucketItem = mBucketItems.get(position);
         // Set item views based on your views and data model
         TextView textView = viewHolder.nameTextView;
         textView.setText(bucketItem.getName());
-        Log.d("This is the date, ", bucketItem.gettDate());
         viewHolder.dateTextView.setText(bucketItem.gettDate());
         if(!bucketItem.isCompleted()) {
             textView.setClickable(true);
@@ -118,12 +117,14 @@ public class  BucketItemAdapter extends
             @Override
             public void onClick( View v) {
                 Intent mIntent = new Intent(mContext, EditItemActivity.class);
-                Log.d("BucketList", "" + bucketItem.getmLatitude());
                 mIntent.putExtra("eName", bucketItem.getName());
                 mIntent.putExtra("eDesc", bucketItem.getmDescription());
                 mIntent.putExtra("eLat", bucketItem.getmLatitude());
                 mIntent.putExtra("eLong", bucketItem.getmLongitude());
-                mIntent.putExtra("eDate", bucketItem.gettDate());
+                mIntent.putExtra("eMonth", bucketItem.getmMonth());
+                mIntent.putExtra("eDay", bucketItem.getmDay());
+                mIntent.putExtra("eYear", bucketItem.getmYear());
+                mIntent.putExtra("bucketIndex", position);
                 ((BucketListActivity)mContext).startActivityForResult(mIntent, 2);
 
             }
@@ -133,7 +134,6 @@ public class  BucketItemAdapter extends
     // Returns the total count of items in the list
     @Override
     public int getItemCount() {
-        Log.d("test", mBucketItems.size() + "");
         return mBucketItems.size();
     }
 

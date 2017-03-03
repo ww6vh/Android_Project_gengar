@@ -15,6 +15,8 @@ import java.util.Date;
 
 public class EditItemActivity extends AppCompatActivity {
 
+    private int pos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,15 +31,13 @@ public class EditItemActivity extends AppCompatActivity {
 
         name.setText(intent.getStringExtra("eName"));
         description.setText(intent.getStringExtra("eDesc"));
-        Log.d("BucketList", "getStringExtra: " + intent.getStringExtra("eLat"));
-        Log.d("BucketList", "getDoubleExtra: " + intent.getDoubleExtra("eLat", 0.0));
         longitude.setText("" + intent.getDoubleExtra("eLat", 0.0));
         latitude.setText("" + intent.getDoubleExtra("eLong", 0.0));
-        int day = 0;
-        int month = 0;
-        int year = 0;
-        date.updateDate(1995,12,01);
-        //date.updateDate(intent.get); = data.getStringExtra("Date");
+        int day = Integer.parseInt(intent.getStringExtra("eDay"));
+        int month = Integer.parseInt(intent.getStringExtra("eMonth"));
+        int year = Integer.parseInt(intent.getStringExtra("eYear"));
+        int pos = intent.getIntExtra("bucketIndex", 0);
+        date.updateDate(year, month-1, day);
 
         setSupportActionBar(toolbar);
 
@@ -76,8 +76,7 @@ public class EditItemActivity extends AppCompatActivity {
         sendInput.putExtra("Lat", sLat);
         sendInput.putExtra("Long", sLong);
         sendInput.putExtra("Date", date);
-
-        Log.d("MyApp", "sending back " + sLat + " " + sLong);
+        sendInput.putExtra("bucketIndex", pos);
 
         setResult(BucketListActivity.RESULT_OK, sendInput);
         finish();
